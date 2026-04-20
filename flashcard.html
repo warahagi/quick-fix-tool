@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickSnippets - 学習モード</title>
+  <style>
+    /* Same Design Tokens as index.html */
+    :root {
+      --bg-color: #f3f4f6;
+      --text-color: #1f2937;
+      --text-muted: #6b7280;
+      --card-bg: #ffffff;
+      --border-color: #e5e7eb;
+      --primary-color: #3b82f6;
+      --primary-hover: #2563eb;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --radius: 0.75rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #111827;
+        --text-color: #f9fafb;
+        --text-muted: #9ca3af;
+        --card-bg: #1f2937;
+        --border-color: #374151;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .nav-header {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .back-btn:hover {
+      color: var(--primary-color);
+    }
+
+    .controls {
+      width: 100%;
+      max-width: 600px;
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    select, .toggle-container {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    /* Flashcard Styles */
+    .flashcard-container {
+      perspective: 1000px;
+      width: 100%;
+      max-width: 500px;
+      height: 350px;
+      cursor: pointer;
+      margin-bottom: 2rem;
+    }
+
+    .flashcard {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      background-color: var(--card-bg);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background-color: var(--bg-color);
+    }
+
+    .card-label {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--bg-color);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .card-content {
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.4;
+      word-break: break-all;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      max-height: 80%;
+    }
+
+    .card-hint {
+      position: absolute;
+      bottom: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Action Buttons */
+    .actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    .btn-next {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-next:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-prev {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-prev:hover {
+      background-color: var(--bg-color);
+    }
+
+    .stats {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    svg {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Flip animation hint */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    .flashcard-container:not(.has-interacted) {
+      animation: pulse 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-header">
+    <a href="index.html" class="back-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      スニペット一覧
+    </a>
+    <h2 style="font-size: 1rem;">単語帳学習</h2>
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="categorySelect">学習カテゴリ</label>
+      <select id="categorySelect">
+        <option value="すべて">すべてのカテゴリ</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="modeSelect">学習モード</label>
+      <select id="modeSelect">
+        <option value="t2c">用語 → 内容・説明</option>
+        <option value="c2t">内容・説明 → 用語</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="flashcard-container" id="cardContainer">
+    <div class="flashcard" id="card">
+      <div class="card-face card-front">
+        <span class="card-label">お題</span>
+        <div class="card-content" id="frontContent">データを読み込み中...</div>
+        <div class="card-hint">クリックして答えを表示</div>
+      </div>
+      <div class="card-face card-back">
+        <span class="card-label">答え</span>
+        <div class="card-content" id="backContent">...</div>
+        <div class="card-hint">クリックでお題に戻る</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-prev" id="prevBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      前へ
+    </button>
+    <button class="btn btn-next" id="nextBtn">
+      次へ
+      <svg width="18" height="18" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+
+  <div class="stats" id="statsDisplay">
+    0 / 0 枚学習中
+  </div>
+
+  <script>
+    let allSnippets = [];
+    let currentPool = [];
+    let currentIndex = -1;
+    let isFlipped = false;
+
+    // DOM
+    const card = document.getElementById('card');
+    const cardContainer = document.getElementById('cardContainer');
+    const frontContent = document.getElementById('frontContent');
+    const backContent = document.getElementById('backContent');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const categorySelect = document.getElementById('categorySelect');
+    const modeSelect = document.getElementById('modeSelect');
+    const statsDisplay = document.getElementById('statsDisplay');
+
+    async function init() {
+      try {
+        const response = await fetch('snippets.json');
+        allSnippets = await response.json();
+        
+        // Populate categories
+        const categories = [...new Set(allSnippets.map(s => s.category))].sort();
+        categories.forEach(cat => {
+          const opt = document.createElement('option');
+          opt.value = cat;
+          opt.textContent = cat;
+          categorySelect.appendChild(opt);
+        });
+
+        updatePool();
+        showNext();
+      } catch (err) {
+        frontContent.textContent = 'データの読み込みに失敗しました。snippets.jsonが正しく配置されているか確認してください。';
+        console.error(err);
+      }
+    }
+
+    function updatePool() {
+      const selectedCat = categorySelect.value;
+      if (selectedCat === 'すべて') {
+        currentPool = [...allSnippets];
+      } else {
+        currentPool = allSnippets.filter(s => s.category === selectedCat);
+      }
+      
+      // Shuffle pool
+      for (let i = currentPool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [currentPool[i], currentPool[j]] = [currentPool[j], currentPool[i]];
+      }
+      
+      currentIndex = -1;
+    }
+
+    function renderCard() {
+      const snippet = currentPool[currentIndex];
+      const mode = modeSelect.value;
+      
+      // Reset flip
+      isFlipped = false;
+      card.classList.remove('flipped');
+
+      if (mode === 't2c') {
+        frontContent.textContent = snippet.title;
+        backContent.textContent = snippet.content;
+      } else {
+        frontContent.textContent = snippet.content;
+        backContent.textContent = snippet.title;
+      }
+
+      statsDisplay.textContent = `${currentIndex + 1} / ${currentPool.length} 枚目（カテゴリ: ${categorySelect.value}）`;
+    }
+
+    function showNext() {
+      if (currentPool.length === 0) {
+        frontContent.textContent = '該当するデータがありません。';
+        backContent.textContent = '';
+        return;
+      }
+      currentIndex = (currentIndex + 1) % currentPool.length;
+      renderCard();
+    }
+
+    function showPrev() {
+      if (currentPool.length === 0) return;
+      currentIndex = (currentIndex - 1 + currentPool.length) % currentPool.length;
+      renderCard();
+    }
+
+    // Events
+    cardContainer.addEventListener('click', () => {
+      isFlipped = !isFlipped;
+      card.classList.toggle('flipped', isFlipped);
+      cardContainer.classList.add('has-interacted');
+    });
+
+    nextBtn.addEventListener('click', showNext);
+    prevBtn.addEventListener('click', showPrev);
+
+    categorySelect.addEventListener('change', () => {
+      updatePool();
+      showNext();
+    });
+
+    modeSelect.addEventListener('change', () => {
+      // Re-render current card with new mode
+      if (currentIndex >= 0 && currentIndex < currentPool.length) {
+        const snippet = currentPool[currentIndex];
+        const mode = modeSelect.value;
+        if (mode === 't2c') {
+          frontContent.textContent = snippet.title;
+          backContent.textContent = snippet.content;
+        } else {
+          frontContent.textContent = snippet.content;
+          backContent.textContent = snippet.title;
+        }
+      }
+    });
+
+    init();
+  </script>
+</body>
+</html>

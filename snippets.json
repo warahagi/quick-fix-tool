@@ -1,0 +1,266 @@
+[
+  {
+    "id": 31,
+    "category": "AIプロンプト",
+    "title": "アイデア・ブレインストーミング",
+    "content": "〇〇についての新しいアイデアを5つ提案してください。\nそれぞれについて、「ターゲット層」「メリット」「実装の難易度（高・中・低）」をまとめた表を作成してください。"
+  },
+  {
+    "id": 29,
+    "category": "AIプロンプト",
+    "title": "コードのエラー解析とバグ修正",
+    "content": "以下のコードとエラーメッセージを確認し、なぜエラーが起きているのか原因を簡潔に説明してください。その上で、エラーを解消するための具体的な修正コードを提案してください。\n\n【対象のエラー】\n\n【コード】\n```\n\n```"
+  },
+  {
+    "id": 28,
+    "category": "AIプロンプト",
+    "title": "コードのリファクタリング提案",
+    "content": "あなたは熟練のシニアエンジニアです。\n以下のコードについて、より可読性が高く、パフォーマンスや拡張性に優れたモダンなアーキテクチャへのリファクタリングを提案し、修正後のコードを提示してください。また変更点とその理由も合わせて解説してください。\n\n【コード】\n```\n\n```"
+  },
+  {
+    "id": 30,
+    "category": "AIプロンプト",
+    "title": "ビジネスメールの添削・ブラッシュアップ",
+    "content": "以下の文章を、社外のクライアントへ送るための、丁寧でプロフェッショナルなビジネスメールのトーンに書き換えてください。失礼がなく、かつ要点が伝わりやすくなるように調整してください。\n\n【元のテキスト】\n"
+  },
+  {
+    "id": 27,
+    "category": "AIプロンプト",
+    "title": "議事録の要約とタスク抽出",
+    "content": "以下のミーティングの文字起こしテキストから、要点を3行でまとめ、決定事項とNext Action（誰が、いつまでに、何をするか）をMarkdown形式で箇条書きにして抽出してください。\n\n【文字起こしテキスト】\n"
+  },
+  {
+    "id": 34,
+    "category": "IT用語集",
+    "title": "API (Application Programming Interface)",
+    "content": "ソフトウェア同士がデータをやり取りするためのインターフェース。認証やデータ取得など、あるプログラムの機能を別のプログラムから利用できるようにする仕組みのこと。"
+  },
+  {
+    "id": 39,
+    "category": "IT用語集",
+    "title": "SaaS (Software as a Service)",
+    "content": "「サース」または「サーズ」。ソフトウェアを自分のパソコンにインストールするのではなく、インターネット経由でサービスとして利用する形態のこと。（例：Gmail, Slack, Salesforceなど）"
+  },
+  {
+    "id": 38,
+    "category": "IT用語集",
+    "title": "UI / UX",
+    "content": "UI (User Interface): ユーザーの目に触れる見た目や操作部分（画面レイアウト、ボタン、フォントなど）。\nUX (User Experience): 製品やサービスを通じてユーザーが得る体験全体（使いやすさ、満足度、わかりやすさなど）。"
+  },
+  {
+    "id": 37,
+    "category": "IT用語集",
+    "title": "アジャイル (Agile) 開発",
+    "content": "ソフトウェアのシステム開発手法のひとつ。要件定義、設計、開発、テストなどの工程を小さな機能単位（スプリント）で短い期間で繰り返し行い、柔軟に仕様変更に対応していく開発スタイル。"
+  },
+  {
+    "id": 35,
+    "category": "IT用語集",
+    "title": "デプロイ (Deploy)",
+    "content": "開発環境で作られたプログラムやシステムを、本番環境のサーバーなどに配置し、実際にユーザーが利用できる状態にすること。Webアプリの公開など。"
+  },
+  {
+    "id": 36,
+    "category": "IT用語集",
+    "title": "リファクタリング (Refactoring)",
+    "content": "プログラムの外部から見た動作を変えずに、内部のソースコードの構造を整理すること。コードの可読性を高めたり、バグを防ぎやすくしたり、今後の機能追加を容易にするために行われる。"
+  },
+  {
+    "id": 40,
+    "category": "IT用語集",
+    "title": "ロジック",
+    "content": "IT分野では処理手順やアルゴリズムを意味します。"
+  },
+  {
+    "id": 17,
+    "category": "よく使うJS集",
+    "title": "DOM：イベントリスナー追加",
+    "content": "document.querySelector('.submit-btn').addEventListener('click', (event) => {\n  event.preventDefault(); // デフォルトの動作をキャンセル\n  console.log('Clicked!', event.target);\n});"
+  },
+  {
+    "id": 18,
+    "category": "よく使うJS集",
+    "title": "DOM：要素の作成と追加",
+    "content": "const div = document.createElement('div');\ndiv.className = 'new-element';\ndiv.textContent = '追加されたテキスト';\ndocument.body.appendChild(div);"
+  },
+  {
+    "id": 14,
+    "category": "よく使うJS集",
+    "title": "fetch API (POST JSON)",
+    "content": "async function postData(url, data) {\n  const res = await fetch(url, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify(data)\n  });\n  return res.json();\n}"
+  },
+  {
+    "id": 13,
+    "category": "よく使うJS集",
+    "title": "fetch API (非同期 GET)",
+    "content": "async function fetchData(url) {\n  try {\n    const res = await fetch(url);\n    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);\n    const data = await res.json();\n    return data;\n  } catch (error) {\n    console.error('Fetch error:', error);\n  }\n}"
+  },
+  {
+    "id": 24,
+    "category": "よく使うJS集",
+    "title": "ユーティリティ：Sleep関数（待機処理）",
+    "content": "const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));\n\n// 使い方\n// await sleep(1000);"
+  },
+  {
+    "id": 20,
+    "category": "よく使うJS集",
+    "title": "ユーティリティ：URLクエリパラメータの取得",
+    "content": "const urlParams = new URLSearchParams(window.location.search);\nconst id = urlParams.get('id'); // ?id=123 の場合、'123'を取得"
+  },
+  {
+    "id": 22,
+    "category": "よく使うJS集",
+    "title": "ユーティリティ：クリップボードへコピー",
+    "content": "async function copyToClipboard(text) {\n  try {\n    await navigator.clipboard.writeText(text);\n    console.log('Copied!');\n  } catch (err) {\n    console.error('Copy failed', err);\n  }\n}"
+  },
+  {
+    "id": 21,
+    "category": "よく使うJS集",
+    "title": "ユーティリティ：ランダムな文字列生成",
+    "content": "const randomString = Math.random().toString(36).substring(2, 10);\n// => '5g9j2k1l' のようなランダム文字列"
+  },
+  {
+    "id": 19,
+    "category": "よく使うJS集",
+    "title": "日付：今日の日付を YYYY-MM-DD で取得",
+    "content": "const date = new Date();\nconst yyyy = date.getFullYear();\nconst mm = String(date.getMonth() + 1).padStart(2, '0');\nconst dd = String(date.getDate()).padStart(2, '0');\nconst formattedDate = `${yyyy}-${mm}-${dd}`;"
+  },
+  {
+    "id": 23,
+    "category": "よく使うJS集",
+    "title": "非同期：複数リクエストの並列処理 (Promise.all)",
+    "content": "const [users, posts] = await Promise.all([\n  fetch('/api/users').then(r => r.json()),\n  fetch('/api/posts').then(r => r.json())\n]);"
+  },
+  {
+    "id": 16,
+    "category": "よく使うJS集",
+    "title": "配列：オブジェクトを特定のプロパティでソート",
+    "content": "const users = [{ name: 'Tom', age: 20 }, { name: 'Bob', age: 15 }];\nusers.sort((a, b) => a.age - b.age);\n// => 昇順ソート（降順は b.age - a.age）"
+  },
+  {
+    "id": 15,
+    "category": "よく使うJS集",
+    "title": "配列：重複な要素を削除 (ユニーク)",
+    "content": "const numbers = [1, 2, 2, 3, 4, 4, 5];\nconst uniqueNumbers = [...new Set(numbers)];\n// => [1, 2, 3, 4, 5]"
+  },
+  {
+    "id": 12,
+    "category": "指示（上司宛）",
+    "title": "コード・資料などのレビュー依頼",
+    "content": "お疲れ様です。〇〇です。\n\n進行中の〇〇の件について、初稿（またはPR）が完成いたしました。\n\n[URLなど]\n\n特に、〇〇の処理（方針）について迷っている部分があり、ご意見をいただけますと幸いです。\nよろしくお願いいたします。"
+  },
+  {
+    "id": 25,
+    "category": "指示（上司宛）",
+    "title": "トラブル報告と相談",
+    "content": "お疲れ様です。〇〇です。\n\n現在進行中の〇〇の件についてご相談です。\n先ほどイレギュラーな事象が発生し、現在原因を切り分けておりますが、〇〇の対応が必要になる可能性が高いです。\n\nお手数ですが、少しお時間をいただき、今後の対応方針についてご指示を仰げないでしょうか。\nよろしくお願いいたします。"
+  },
+  {
+    "id": 11,
+    "category": "指示（上司宛）",
+    "title": "承認・確認のお願い",
+    "content": "お疲れ様です。〇〇です。\n\n〇〇の件について、資料を作成いたしました。\nお忙しいところ恐縮ですが、内容のご確認とご承認をお願いいたします。"
+  },
+  {
+    "id": 32,
+    "category": "指示（部下宛）",
+    "title": "コード・資料の修正依頼",
+    "content": "お疲れ様です。レビューありがとうございます。\n\n全体的に問題ありませんが、数点だけ修正をお願いしたい箇所があります。\n\n・〇〇の部分について、XXの理由から△△のように変更してください。\n・\n\n反映が終わりましたら、再度お知らせください。よろしくお願いします。"
+  },
+  {
+    "id": 26,
+    "category": "指示（部下宛）",
+    "title": "新規タスクの作業依頼",
+    "content": "お疲れ様です。\n\n次回リリースに向けた〇〇の機能実装（または資料作成）をお願いします。\n\n【目的】\n【要件】\n【希望期限】〇月〇日（〇）終日\n\n進め方で不明点があれば、着手前に気軽に聞いてください。\nよろしくお願いします。"
+  },
+  {
+    "id": 33,
+    "category": "指示（部下宛）",
+    "title": "関連部署への共有依頼",
+    "content": "お疲れ様です。\n\n本日のミーティングで決定した〇〇の件について、関連メンバーへ議事録の共有および展開をお願いできますか？\nもし質問があった場合は集約してもらえると助かります。\nよろしくお願いします。"
+  },
+  {
+    "id": 3,
+    "category": "挨拶（社外）",
+    "title": "ご無沙汰しております",
+    "content": "ご無沙汰しておりますが、いかがお過ごしでしょうか。\n〇〇の××です。"
+  },
+  {
+    "id": 4,
+    "category": "挨拶（社外）",
+    "title": "打ち合わせのお礼",
+    "content": "いつも大変お世話になっております。\n〇〇の××です。\n\n本日はお忙しい中、貴重なお時間をいただき誠にありがとうございました。\n打ち合わせの内容について、以下の通り議事録をまとめましたのでご確認ください。"
+  },
+  {
+    "id": 2,
+    "category": "挨拶（社外）",
+    "title": "得意先様宛（基本）",
+    "content": "いつも大変お世話になっております。\n〇〇の××です。"
+  },
+  {
+    "id": 1,
+    "category": "挨拶（社外）",
+    "title": "得意先社長様宛（初回）",
+    "content": "〇〇株式会社\n代表取締役社長 〇〇様\n\n突然のご連絡失礼いたします。\n株式会社××の△△と申します。\n\n貴社のさらなるご発展を心よりお祈り申し上げます。"
+  },
+  {
+    "id": 5,
+    "category": "挨拶（社外）",
+    "title": "見積書のご送付",
+    "content": "いつも大変お世話になっております。\n〇〇の××です。\n\nご依頼いただいておりました見積書が完成いたしましたので、PDFにてお送りいたします。\nご査収のほど、よろしくお願い申し上げます。"
+  },
+  {
+    "id": 6,
+    "category": "挨拶（社外）",
+    "title": "請求書のご送付",
+    "content": "いつも大変お世話になっております。\n〇〇の××です。\n\n今月分の請求書をお送りいたします。\n内容をご確認いただき、不明点などがございましたらご連絡ください。"
+  },
+  {
+    "id": 7,
+    "category": "挨拶（社内）",
+    "title": "お疲れ様です（基本）",
+    "content": "お疲れ様です。〇〇です。"
+  },
+  {
+    "id": 8,
+    "category": "挨拶（社内）",
+    "title": "休暇のお知らせ",
+    "content": "お疲れ様です。〇〇です。\n\n私事で恐縮ですが、〇月〇日（〇）を有給休暇のためお休みさせていただきます。\nご迷惑をおかけしますが、よろしくお願いいたします。"
+  },
+  {
+    "id": 10,
+    "category": "挨拶（社内）",
+    "title": "会議開催のお知らせ",
+    "content": "お疲れ様です。〇〇です。\n\n以下の通り、〇〇についての打ち合わせを実施したく存じます。\n\n日時：〇月〇日（〇） 14:00〜15:00\n場所：第〇会議室\nアジェンダ：\n1. \n2. "
+  },
+  {
+    "id": 9,
+    "category": "挨拶（社内）",
+    "title": "直行・直帰の連絡",
+    "content": "お疲れ様です。〇〇です。\n\n本日は〇〇への訪問のため、直行（直帰）とさせていただきます。\n緊急の場合は、携帯電話（090-XXXX-XXXX）までご連絡ください。"
+  },
+  {
+    "id": 41,
+    "category": "IT用語集",
+    "title": "ファインチューニング",
+    "content": "事前学習済みのAIモデル（ベースモデル）に対し、特定のタスクや専門分野のデータを用いて追加で再学習を行い、パラメーターを微調整する技術です。一からモデルを構築するより少ないデータと短時間で、特定の用途に特化した高性能なモデル（例：医療、法律、社内データ対応など）を作成できる手法です。"
+  },
+  {
+    "id": 42,
+    "category": "IT用語集",
+    "title": "スニペット",
+    "content": "1,SEO/Web検索: 検索結果に表示されるWebページの要約文。\n2,プログラミング: 再利用可能な短いソースコードの断片。"
+  },
+  {
+    "id": 43,
+    "category": "IT用語集",
+    "title": "コンテキスト",
+    "content": "IT・技術: プログラムやシステムが動作する「環境や状況」を指す。例：コンテキストメニュー、コンテキストスイッチ。\nAI: AIに指示を与える際、正確な回答を導き出すために必要な「背景情報」や「条件」"
+  },
+  {
+    "id": 44,
+    "category": "IT用語集",
+    "title": "メソッド",
+    "content": "オブジェクトに関連付けられた処理の集まり"
+  }
+]
