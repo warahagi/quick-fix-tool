@@ -243,6 +243,107 @@
     .flashcard-container:not(.has-interacted) {
       animation: pulse 2s infinite ease-in-out;
     }
+
+    /* Omikuji Styles */
+    .omikuji-btn {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      padding: 0 1.25rem;
+      height: 3.5rem;
+      border-radius: 2rem;
+      background-color: #ef4444; /* Red for Omikuji */
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+      cursor: pointer;
+      border: 2px solid #fff;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 40;
+      font-weight: 800;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .omikuji-btn:hover {
+      background-color: #dc2626;
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.5);
+    }
+
+    .omikuji-btn:active {
+      transform: translateY(0) scale(0.95);
+    }
+
+    .omikuji-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      padding: 2rem;
+    }
+
+    .omikuji-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .omikuji-box {
+      background: #fff;
+      color: #1f2937;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+      border: 4px solid #ef4444;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .omikuji-overlay.active .omikuji-box {
+      transform: scale(1);
+    }
+
+    .omikuji-fortune {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #ef4444;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .omikuji-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .omikuji-close {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.5rem 2rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .omikuji-close:hover {
+      background: #dc2626;
+    }
   </style>
 </head>
 <body>
@@ -299,6 +400,22 @@
 
   <div class="stats" id="statsDisplay">
     0 / 0 枚学習中
+  </div>
+
+  <!-- Omikuji FAB -->
+  <button class="omikuji-btn" id="omikujiBtn" title="ビジネスおみくじを引く">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+    <span>おみくじ</span>
+  </button>
+
+  <!-- Omikuji Modal -->
+  <div class="omikuji-overlay" id="omikujiOverlay">
+    <div class="omikuji-box">
+      <div style="font-size: 0.8rem; font-weight: 700; color: #ef4444; text-transform: uppercase; margin-bottom: 0.5rem;">Business Omikuji</div>
+      <span id="omikujiFortune" class="omikuji-fortune">大吉</span>
+      <p id="omikujiText" class="omikuji-text">今日のあなたは学習効率が最高潮です！新しい知識がスッと頭に入ります。</p>
+      <button class="omikuji-close" id="omikujiClose">閉じる</button>
+    </div>
   </div>
 
   <script>
@@ -420,6 +537,38 @@
           backContent.textContent = snippet.title;
         }
       }
+    });
+
+    // Omikuji Logic
+    const omikujiBtn = document.getElementById('omikujiBtn');
+    const omikujiOverlay = document.getElementById('omikujiOverlay');
+    const omikujiClose = document.getElementById('omikujiClose');
+    const omikujiFortune = document.getElementById('omikujiFortune');
+    const omikujiText = document.getElementById('omikujiText');
+
+    const fortunes = [
+      { f: '大吉', t: '全コードがバグなしで動く予感！学習効率も最高潮です。' },
+      { f: '大吉', t: '革新的なロジックが閃きます。今日は難しい用語の暗記に最適。' },
+      { f: '吉', t: '集中力が持続する一日。スニペットを5つ覚えると運気UP。' },
+      { f: '吉', t: '周囲からの信頼が高まります。丁寧なメール挨拶が吉。' },
+      { f: '中吉', t: '定時退社の相が出ています。業務効率化ツールを使い倒しましょう。' },
+      { f: '中吉', t: '新しい技術への挑戦にツキがあります。JSコード集をチェック！' },
+      { f: '小吉', t: '地道な努力が実を結ぶ日。リファクタリングを少しずつ進めて。' },
+      { f: '小吉', t: '焦らず一歩ずつ。休憩時間にIT用語を一つ覚えるのがおすすめ。' },
+      { f: '末吉', t: '可もなく不可もない穏やかな一日。基礎の復習に時間を割いて。' },
+      { f: '凶', t: 'セミコロン忘れに注意。深呼吸してからコードを見直しましょう。' },
+      { f: '大凶', t: '強制終了の相あり。保存（Save/DL）はこまめに行いましょう！' }
+    ];
+
+    omikujiBtn.addEventListener('click', () => {
+      const result = fortunes[Math.floor(Math.random() * fortunes.length)];
+      omikujiFortune.textContent = result.f;
+      omikujiText.textContent = result.t;
+      omikujiOverlay.classList.add('active');
+    });
+
+    omikujiClose.addEventListener('click', () => {
+      omikujiOverlay.classList.remove('active');
     });
 
     init();
