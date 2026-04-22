@@ -72,6 +72,96 @@
     "content": "IT分野では処理手順やアルゴリズムを意味します。"
   },
   {
+    "id": 41,
+    "category": "IT用語集",
+    "title": "ファインチューニング",
+    "content": "事前学習済みのAIモデル（ベースモデル）に対し、特定のタスクや専門分野のデータを用いて追加で再学習を行い、パラメーターを微調整する技術です。"
+  },
+  {
+    "id": 42,
+    "category": "IT用語集",
+    "title": "スニペット",
+    "content": "1,SEO/Web検索: 検索結果に表示されるWebページの要約文。2,プログラミング: 再利用可能な短いソースコードの断片。"
+  },
+  {
+    "id": 43,
+    "category": "IT用語集",
+    "title": "コンテキスト",
+    "content": "IT・技術: プログラムやシステムが動作する「環境や状況」を指す。AI: AIに正確な回答を導き出すために必要な「背景情報」や「条件」"
+  },
+  {
+    "id": 44,
+    "category": "IT用語集",
+    "title": "メソッド",
+    "content": "オブジェクトに関連付けられた処理の集まり"
+  },
+  {
+    "id": 45,
+    "category": "IT用語集",
+    "title": "タスク",
+    "content": "コンピューターが処理する仕事の最小単位を指します。"
+  },
+  {
+    "id": 46,
+    "category": "IT用語集",
+    "title": "オブジェクト",
+    "content": "プログラミングにおいて、データ（属性）と、操作（メソッド）を1つのまとまりとして扱ったものです。"
+  },
+  {
+    "id": 47,
+    "category": "IT用語集",
+    "title": "リソース",
+    "content": "IT分野ではCPUやメモリなどの「計算資源」を指します。"
+  },
+  {
+    "id": 48,
+    "category": "SQL構文集",
+    "title": "SELECT (基本データ抽出)",
+    "content": "SELECT column1, column2 FROM table_name WHERE condition;"
+  },
+  {
+    "id": 49,
+    "category": "SQL構文集",
+    "title": "INSERT (データの挿入)",
+    "content": "INSERT INTO table_name (column1, column2) VALUES (value1, value2);"
+  },
+  {
+    "id": 50,
+    "category": "SQL構文集",
+    "title": "UPDATE (データの更新)",
+    "content": "UPDATE table_name SET column1 = value1 WHERE condition;"
+  },
+  {
+    "id": 51,
+    "category": "SQL構文集",
+    "title": "DELETE (データの削除)",
+    "content": "DELETE FROM table_name WHERE condition;"
+  },
+  {
+    "id": 52,
+    "category": "SQL構文集",
+    "title": "JOIN (テーブル結合)",
+    "content": "SELECT A.col, B.col FROM tableA A INNER JOIN tableB B ON A.id = B.id;"
+  },
+  {
+    "id": 53,
+    "category": "SQL構文集",
+    "title": "GROUP BY (グループ化して集計)",
+    "content": "SELECT category, COUNT(*) FROM products GROUP BY category;"
+  },
+  {
+    "id": 54,
+    "category": "SQL構文集",
+    "title": "ORDER BY (並び替え)",
+    "content": "SELECT * FROM users ORDER BY created_at DESC; -- 降順\nSELECT * FROM users ORDER BY age ASC; -- 昇順"
+  },
+  {
+    "id": 55,
+    "category": "SQL構文集",
+    "title": "CREATE TABLE (テーブル作成)",
+    "content": "CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  email VARCHAR(100) UNIQUE\n);"
+  },
+  {
     "id": 17,
     "category": "よく使うJS集",
     "title": "DOM：イベントリスナー追加",
@@ -165,7 +255,7 @@
     "id": 32,
     "category": "指示（部下宛）",
     "title": "コード・資料の修正依頼",
-    "content": "お疲れ様です。レビューありがとうございます。\n\n全体的に問題ありませんが、数点だけ修正をお願いしたい箇所があります。\n\n・〇〇の部分について、XXの理由から△△のように変更してください。\n・\n\n反映が終わりましたら、再度お知らせください。よろしくお願いします。"
+    "content": "お疲れ様です。レビューありがとうございます。\n\n全体的に問題ありませんが、数点だけ修正をお願いしたい箇所があります。\n\n・〇〇の部分について、XXの理由から△△のように変更してください。\n・\n\n反映が終わりましたら、再度お知らせください. よろしくお願いします。"
   },
   {
     "id": 26,
@@ -240,45 +330,27 @@
     "content": "お疲れ様です。〇〇です。\n\n本日は〇〇への訪問のため、直行（直帰）とさせていただきます。\n緊急の場合は、携帯電話（090-XXXX-XXXX）までご連絡ください。"
   },
   {
-    "id": 41,
+    "id": 56,
     "category": "IT用語集",
-    "title": "ファインチューニング",
-    "content": "事前学習済みのAIモデル（ベースモデル）に対し、特定のタスクや専門分野のデータを用いて追加で再学習を行い、パラメーターを微調整する技術です。一からモデルを構築するより少ないデータと短時間で、特定の用途に特化した高性能なモデル（例：医療、法律、社内データ対応など）を作成できる手法です。"
+    "title": "カラム",
+    "content": "IT分野においては、基本的には「縦の列」と認識すれば間違いありません。 "
   },
   {
-    "id": 42,
+    "id": 57,
     "category": "IT用語集",
-    "title": "スニペット",
-    "content": "1,SEO/Web検索: 検索結果に表示されるWebページの要約文。\n2,プログラミング: 再利用可能な短いソースコードの断片。"
+    "title": "ロウ",
+    "content": "データベースのテーブル（表）における「行（横方向）」を指す言葉です。"
   },
   {
-    "id": 43,
+    "id": 58,
     "category": "IT用語集",
-    "title": "コンテキスト",
-    "content": "IT・技術: プログラムやシステムが動作する「環境や状況」を指す。例：コンテキストメニュー、コンテキストスイッチ。\nAI: AIに指示を与える際、正確な回答を導き出すために必要な「背景情報」や「条件」"
+    "title": "テーブル",
+    "content": "主にデータベース（RDB）において、データを「行（レコード）」と「列（カラム）」の碁盤目状（表形式）で管理する、データを格納する"
   },
   {
-    "id": 44,
+    "id": 59,
     "category": "IT用語集",
-    "title": "メソッド",
-    "content": "オブジェクトに関連付けられた処理の集まり"
-  },
-  {
-    "id": 45,
-    "category": "IT用語集",
-    "title": "タスク",
-    "content": "コンピューターが処理する仕事の最小単位（タスクマネージャー等で表示されるもの）を指します。"
-  },
-  {
-    "id": 46,
-    "category": "IT用語集",
-    "title": "オブジェクト",
-    "content": "プログラミング（特にオブジェクト指向）において、データ（属性）と、そのデータに対する操作（手続き・メソッド）を1つのまとまりとして扱ったものです。"
-  },
-  {
-    "id": 47,
-    "category": "IT用語集",
-    "title": "リソース",
-    "content": "IT分野ではCPUやメモリなどの「計算資源」を指します。有限であるため、計画的な管理（リソース管理）が成果最大化に必須となります。"
+    "title": "index",
+    "content": "「一覧」や「最初のページ」という意味です。Webではトップページ（最初に表示されるページ）として使われる名前です。"
   }
 ]
