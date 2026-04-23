@@ -40,7 +40,10 @@
     "category": "IT用語集",
     "title": "SaaS (Software as a Service)",
     "content": "「サース」または「サーズ」。ソフトウェアを自分のパソコンにインストールするのではなく、インターネット経由でサービスとして利用する形態のこと。（例：Gmail, Slack, Salesforceなど）",
-    "tags": ["用語解説", "IT基礎"]
+    "tags": [
+      "用語解説",
+      "IT基礎"
+    ]
   },
   {
     "id": 38,
@@ -143,7 +146,10 @@
     "category": "SQL構文集",
     "title": "JOIN (テーブル結合)",
     "content": "SELECT A.col, B.col FROM tableA A INNER JOIN tableB B ON A.id = B.id;",
-    "tags": ["SQL", "データベース"]
+    "tags": [
+      "SQL",
+      "データベース"
+    ]
   },
   {
     "id": 53,
@@ -180,7 +186,10 @@
     "category": "よく使うJS集",
     "title": "fetch API (POST JSON)",
     "content": "async function postData(url, data) {\n  const res = await fetch(url, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify(data)\n  });\n  return res.json();\n}",
-    "tags": ["JavaScript", "非同期処理"]
+    "tags": [
+      "JavaScript",
+      "非同期処理"
+    ]
   },
   {
     "id": 13,
@@ -361,7 +370,11 @@
     "category": "AWS AI Practitioner",
     "title": "Amazon Bedrock",
     "content": "基盤モデル (FM) を API を通を通じて利用できるようにするフルマネージド型サービス。サーバーインフラを管理することなく、生成 AI アプリケーションを構築・拡張できるのが特徴。",
-    "tags": ["AWS", "AI", "試験対策"]
+    "tags": [
+      "AWS",
+      "AI",
+      "試験対策"
+    ]
   },
   {
     "id": 61,
@@ -386,7 +399,11 @@
     "category": "AWS AI Practitioner",
     "title": "LLM (大規模言語モデル)",
     "content": "膨大なテキストデータで学習された、高度な自然言語処理能力を持つ AI モデル。文章生成、要約、翻訳、プログラミングコードの作成などが可能。",
-    "tags": ["生成AI", "LLM", "試験対策"]
+    "tags": [
+      "生成AI",
+      "LLM",
+      "試験対策"
+    ]
   },
   {
     "id": 65,
@@ -405,5 +422,12 @@
     "category": "AWS AI Practitioner",
     "title": "バイアス",
     "content": "モデルの予測値と真の値の平均的な誤差を指します。「偏り」「偏見」「先入観」を指し、データ分析、機械学習、電気工学、認知心理学などの分野で、本来あるべき値や公平な判断から系統的にずれてしまう現象"
+  },
+  {
+    "id": 68,
+    "category": "IT用語集",
+    "title": "プッシュ（Push）",
+    "content": "送信側がタイミングを決めてデータを送ります。\n\n例\nスマホの通知（ニュース・SNS）\nメールの新着通知\nアプリのプッシュ通知\n\n👉 何もしなくても届くのが特徴",
+    "tags": []
   }
 ]
