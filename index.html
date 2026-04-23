@@ -478,10 +478,16 @@
         <svg width="20" height="20" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
         QuickSnippets
       </h1>
-      <a href="flashcard.html" class="study-link">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-        学習モード
-      </a>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button id="linkFileBtn" class="study-link" style="background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color);" title="ローカルのsnippets.jsonと直接連携します">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          <span id="linkFileStatus">ファイル連携</span>
+        </button>
+        <a href="flashcard.html" class="study-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          学習モード
+        </a>
+      </div>
     </div>
     <div class="search-container">
       <input type="text" id="searchInput" class="search-input" placeholder="タイトルや内容から検索...">
@@ -552,7 +558,8 @@
     // State
     let state = {
       searchQuery: '',
-      activeCategory: 'すべて'
+      activeCategory: 'すべて',
+      fileHandle: null // For File System Access API
     };
 
     // DOM Elements
@@ -724,6 +731,34 @@
     const cancelModalBtn = document.getElementById('cancelModalBtn');
     const addForm = document.getElementById('addForm');
     const categoryOptions = document.getElementById('categoryOptions');
+    const linkFileBtn = document.getElementById('linkFileBtn');
+    const linkFileStatus = document.getElementById('linkFileStatus');
+
+    // File System Access API: Link Local File
+    async function handleLinkFile() {
+      try {
+        const [handle] = await window.showOpenFilePicker({
+          types: [{
+            description: 'JSON Files',
+            accept: { 'application/json': ['.json'] },
+          }],
+          multiple: false
+        });
+        
+        state.fileHandle = handle;
+        linkFileStatus.textContent = '連携済み';
+        linkFileBtn.style.borderColor = 'var(--success-color)';
+        linkFileBtn.style.color = 'var(--success-color)';
+        showToast('ファイルの連携に成功しました！');
+      } catch (err) {
+        console.error('File link failed:', err);
+        if (err.name !== 'AbortError') {
+          showToast('ファイルの連携に失敗しました');
+        }
+      }
+    }
+
+    linkFileBtn.addEventListener('click', handleLinkFile);
 
     function openModal() {
       const categories = getCategories().filter(c => c !== 'すべて');
@@ -740,7 +775,7 @@
     closeModalBtn.addEventListener('click', closeModal);
     cancelModalBtn.addEventListener('click', closeModal);
 
-    addForm.addEventListener('submit', (e) => {
+    addForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const category = document.getElementById('inputCategory').value.trim();
       const title = document.getElementById('inputTitle').value.trim();
@@ -751,7 +786,38 @@
       const newSnippet = { id: newId, category, title, content };
       const updatedData = [...snippetsData, newSnippet];
 
-      const jsonString = JSON.stringify(updatedData, null, 2);
+      // 保存処理
+      if (state.fileHandle) {
+        // 直接書き込み（File System Access API）
+        try {
+          const writable = await state.fileHandle.createWritable();
+          await writable.write(JSON.stringify(updatedData, null, 2));
+          await writable.close();
+          showToast('ファイルを直接更新しました！');
+        } catch (err) {
+          console.error('Direct write failed:', err);
+          showToast('直接保存に失敗したため、DLを開始します');
+          downloadAsJson(updatedData);
+        }
+      } else {
+        // 従来のダウンロード方式
+        downloadAsJson(updatedData);
+        showToast('ファイルをダウンロードしました。');
+      }
+
+      // UI更新
+      snippetsData.push(newSnippet);
+      renderTabs();
+      state.activeCategory = category;
+      state.searchQuery = '';
+      searchInput.value = '';
+      renderSnippets();
+      
+      closeModal();
+    });
+
+    function downloadAsJson(data) {
+      const jsonString = JSON.stringify(data, null, 2);
       const blob = new Blob([jsonString], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -761,17 +827,7 @@
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-
-      snippetsData.push(newSnippet);
-      renderTabs();
-      state.activeCategory = category;
-      state.searchQuery = '';
-      searchInput.value = '';
-      renderSnippets();
-      
-      showToast('snippets.jsonをダウンロードしました。');
-      closeModal();
-    });
+    }
 
     // Initialize App
     async function init() {
