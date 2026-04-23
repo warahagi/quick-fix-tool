@@ -546,9 +546,13 @@
         <button id="statsBtn" class="study-link" style="background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color);" title="統計を表示">
           <svg width="16" height="16" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
         </button>
+        <button id="importCsvBtn" class="study-link" style="background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color);" title="CSVからインポート">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+        </button>
         <button id="exportCsvBtn" class="study-link" style="background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color);" title="CSVでエクスポート">
           <svg width="16" height="16" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
         </button>
+        <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
         <button id="linkFileBtn" class="study-link" style="background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color);" title="ローカルのsnippets.jsonと直接連携します">
           <svg width="16" height="16" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
           <span id="linkFileStatus" class="hide-mobile">連携</span>
@@ -1070,6 +1074,118 @@
       triggerDownload(blob, 'snippets_export.csv');
       showToast('CSVを書き出しました');
     });
+
+    // Import CSV Logic
+    const importCsvBtn = document.getElementById('importCsvBtn');
+    const csvFileInput = document.getElementById('csvFileInput');
+
+    importCsvBtn.addEventListener('click', () => csvFileInput.click());
+
+    csvFileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        const text = event.target.result;
+        const importedData = parseCSV(text);
+        
+        if (importedData.length === 0) {
+          showToast('CSVの読み込みに失敗しました');
+          return;
+        }
+
+        // Merge logic: Add new ones, generate new IDs
+        let currentMaxId = snippetsData.length > 0 ? Math.max(...snippetsData.map(s => s.id)) : 0;
+        const newData = [...snippetsData];
+
+        importedData.forEach(item => {
+          currentMaxId++;
+          newData.push({
+            id: currentMaxId,
+            category: item.category || '未分類',
+            title: item.title || '無題',
+            content: item.content || '',
+            tags: item.tags ? item.tags.split('|').filter(t => t !== '') : []
+          });
+        });
+
+        const success = await saveData(newData);
+        if (success) {
+          snippetsData = newData;
+          renderTabs();
+          renderSnippets();
+          showToast(`${importedData.length}件のスニペットを追加しました`);
+        }
+        
+        csvFileInput.value = ''; // Reset input
+      };
+      reader.readAsText(file);
+    });
+
+    // Basic CSV Parser (Handles quotes and multiline)
+    function parseCSV(text) {
+      const rows = [];
+      let currentField = '';
+      let currentRow = [];
+      let inQuotes = false;
+      
+      // Normalize line endings
+      const content = text.trim().replace(/\r\n/g, '\n');
+      
+      for (let i = 0; i < content.length; i++) {
+        const char = content[i];
+        const nextChar = content[i+1];
+
+        if (inQuotes) {
+          if (char === '"' && nextChar === '"') {
+            currentField += '"';
+            i++;
+          } else if (char === '"') {
+            inQuotes = false;
+          } else {
+            currentField += char;
+          }
+        } else {
+          if (char === '"') {
+            inQuotes = true;
+          } else if (char === ',') {
+            currentRow.push(currentField.trim());
+            currentField = '';
+          } else if (char === '\n') {
+            currentRow.push(currentField.trim());
+            rows.push(currentRow);
+            currentRow = [];
+            currentField = '';
+          } else {
+            currentField += char;
+          }
+        }
+      }
+      
+      if (currentRow.length > 0 || currentField !== '') {
+        currentRow.push(currentField.trim());
+        rows.push(currentRow);
+      }
+
+      if (rows.length < 2) return [];
+
+      const headers = rows[0].map(h => h.toLowerCase());
+      const data = [];
+      
+      for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        if (row.length < 2) continue;
+        
+        const obj = {};
+        headers.forEach((header, index) => {
+          obj[header] = row[index];
+        });
+        data.push(obj);
+      }
+      
+      return data;
+    }
 
     function triggerDownload(blob, filename) {
       const url = URL.createObjectURL(blob);
