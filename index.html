@@ -561,6 +561,38 @@
     </div>
   </div>
 
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal-content">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <div style="font-size:1.1rem; font-weight:600;">スニペットの編集</div>
+        <button id="closeEditModalBtn" style="background:none; border:none; cursor:pointer; color:var(--text-muted);"><svg width="20" height="20" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+      </div>
+      <form id="editForm">
+        <input type="hidden" id="editId">
+        <div style="margin-bottom: 1rem;">
+          <label style="display:block; font-size: 0.8rem; font-weight: 500; margin-bottom: 0.3rem;">カテゴリ（ここを変更して移動）</label>
+          <input type="text" id="editCategory" class="search-input" required placeholder="例: IT用語集" list="categoryOptions">
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display:block; font-size: 0.8rem; font-weight: 500; margin-bottom: 0.3rem;">タイトル</label>
+          <input type="text" id="editTitle" class="search-input" required>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display:block; font-size: 0.8rem; font-weight: 500; margin-bottom: 0.3rem;">内容</label>
+          <textarea id="editContent" class="search-input" required style="resize:vertical; min-height:100px; font-family:monospace; padding:0.5rem;"></textarea>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem;">
+          <button type="button" id="deleteBtn" style="padding:0.5rem 1rem; border-radius:var(--radius); border:1px solid #ef4444; background:none; color:#ef4444; cursor:pointer;">削除</button>
+          <div style="display:flex; gap:0.5rem;">
+            <button type="button" id="cancelEditModalBtn" style="padding:0.5rem 1rem; border-radius:var(--radius); border:1px solid var(--border-color); background:var(--bg-color); color:var(--text-color); cursor:pointer;">キャンセル</button>
+            <button type="submit" style="padding:0.5rem 1rem; border-radius:var(--radius); border:none; background:var(--primary-color); color:white; font-weight:500; cursor:pointer;">更新して保存</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
     /**
      * Data Management
