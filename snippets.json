@@ -443,5 +443,41 @@
     "title": "比較演算子",
     "content": "2つの値を比べて、条件が正しいか（真・偽）を判断する記号演算子\t\n意味\t例\t結果\n=\t等しい\t5 = 5\ttrue\n!= または <>\t等しくない\t5 != 3\ttrue\n>\tより大きい\t5 > 3\ttrue\n<\tより小さい\t3 < 5\ttrue\n>=\t以上\t5 >= 5\ttrue\n<=\t以下\t3 <= 5\t\ntrueSELECT *FROM 社員WHERE 年齢 >= 30;\n\n👉 「年齢が30以上の人」を抽出",
     "tags": []
+  },
+  {
+    "id": 71,
+    "category": "HTML構文集",
+    "title": "HTML5雛形（Base Template）",
+    "content": "<!DOCTYPE html>\n<html lang=\"ja\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Document</title>\n</head>\n<body>\n    <!-- ここにコンテンツ -->\n</body>\n</html>",
+    "tags": [
+      "重要これがないと始まらない、全てのベースです。"
+    ]
+  },
+  {
+    "id": 72,
+    "category": "HTML構文集",
+    "title": "外部ファイルの読み込み（CSS&JS）",
+    "content": "<!-- CSSの読み込み -->\n<link rel=\"stylesheet\" href=\"css/style.css\">\n\n<!-- JSの読み込み（body閉じタグの直前推奨） -->\n<script src=\"js/main.js\"></script>",
+    "tags": [
+      "重要「あれ、パスの書き方どうだっけ？」を防ぐセットです。"
+    ]
+  },
+  {
+    "id": 73,
+    "category": "HTML構文集",
+    "title": "よく使うUIパーツ（リンク・画像）",
+    "content": "<!-- 外部リンク（別タブで開く） -->\n<a href=\"URL\" target=\"_blank\" rel=\"noopener noreferrer\">テキスト</a>\n\n<-- 画像（レスポンシブ・遅延読み込み対応） -->\n<img src=\"path/to/image.jpg\" alt=\"画像の説明\" loading=\"lazy\" width=\"\" height=\"\">\n",
+    "tags": [
+      "重要実務で必須の属性をセットにした構文です。"
+    ]
+  },
+  {
+    "id": 74,
+    "category": "HTML構文集",
+    "title": "リスト構造（Navigationなど）",
+    "content": "<ul>\n   <li><a href=\"#\">メニュー1</a></li>\n   <li><a href=\"#\">メニュー2</a></li>\n   <li><a href=\"#\">メニュー3</a></li>\n</ul>",
+    "tags": [
+      "重要メニューなどを作る際に多用します。"
+    ]
   }
 ]
