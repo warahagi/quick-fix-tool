@@ -1,0 +1,16 @@
+# Windows
+Thumbs.db
+Desktop.ini
+
+# IDEs/Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local backups
+snippets_backup_*.json
+backup_*.csv
+
+# Logs
+*.log
