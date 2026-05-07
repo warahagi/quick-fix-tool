@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quick Fix & Snippets</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3b82f6">
+  <link rel="apple-touch-icon" href="icon-512.png">
   <style>
     /* CSS Variables for Theming */
     :root {
@@ -289,6 +292,13 @@
       cursor: pointer;
       transition: all 0.2s;
       opacity: 0.7; /* visible by default for touch devices, more opaque on hover */
+    }
+
+    @media (max-width: 600px) {
+      .copy-btn {
+        width: 2.75rem;
+        height: 2.75rem;
+      }
     }
 
     @media (hover: hover) {
@@ -1294,6 +1304,15 @@
     }
 
     init();
+
+    // Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('SW registered', reg))
+          .catch(err => console.error('SW registration failed', err));
+      });
+    }
   </script>
 </body>
 </html>

@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QuickSnippets - 学習モード</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3b82f6">
+  <link rel="apple-touch-icon" href="icon-512.png">
   <style>
     /* Same Design Tokens as index.html */
     :root {
@@ -111,7 +114,9 @@
       perspective: 1000px;
       width: 100%;
       max-width: 500px;
-      height: 350px;
+      height: 50vh;
+      min-height: 280px;
+      max-height: 400px;
       cursor: pointer;
       margin-bottom: 2rem;
     }
@@ -183,13 +188,18 @@
     .actions {
       display: flex;
       gap: 1rem;
+      width: 100%;
+      max-width: 500px;
+      justify-content: center;
     }
 
     .btn {
-      padding: 0.75rem 1.5rem;
+      padding: 0.85rem 1.75rem;
       border-radius: 50px;
       border: none;
       font-weight: 600;
+      flex: 1;
+      justify-content: center;
       cursor: pointer;
       transition: transform 0.1s, opacity 0.2s;
       display: flex;
@@ -573,6 +583,15 @@
     });
 
     init();
+
+    // Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('SW registered', reg))
+          .catch(err => console.error('SW registration failed', err));
+      });
+    }
   </script>
 </body>
 </html>
