@@ -488,5 +488,19 @@
     "tags": [
       "重要"
     ]
+  },
+  {
+    "id": 76,
+    "category": "IT用語集",
+    "title": "コードのリファクタリング",
+    "content": "整理整頓",
+    "tags": []
+  },
+  {
+    "id": 77,
+    "category": "IT用語集",
+    "title": "マークアップ",
+    "content": "HTML設計",
+    "tags": []
   }
 ]
