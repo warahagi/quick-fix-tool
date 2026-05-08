@@ -70,6 +70,18 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex: 1;
+      min-width: 200px;
     }
 
     .header h1 {
@@ -552,7 +564,7 @@
         <svg width="20" height="20" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
         QuickSnippets
       </h1>
-      <div style="display: flex; gap: 0.5rem; align-items: center;">
+      <div class="header-actions">
         <button id="statsBtn" class="study-link" style="background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color);" title="統計を表示">
           <svg width="16" height="16" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
         </button>
@@ -688,6 +700,9 @@
   <style>
     @media (max-width: 600px) {
       .hide-mobile { display: none; }
+      .header-top { justify-content: center; }
+      .header-actions { justify-content: center; width: 100%; }
+      .study-link { padding: 0.4rem 0.6rem; }
     }
   </style>
 
