@@ -502,5 +502,121 @@
     "title": "マークアップ",
     "content": "HTML設計",
     "tags": []
+  },
+  {
+    "id": 78,
+    "category": "CSSテクニック",
+    "title": "類似クラス： :focus",
+    "content": "内容：要素がクリック（フォーカス）された時のスタイルを指定する。\n例：.placeholder:focus {background-color: #fffde7; }",
+    "tags": [
+      "重要"
+    ]
+  },
+  {
+    "id": 79,
+    "category": "CSSテクニック",
+    "title": "類似クラス：:hover",
+    "content": "内容：マウスカーソルが要素の上に乗った時のスタイルを指定する。\n例：tr:hover { bockground-color: #f0f0f0;}",
+    "tags": [
+      "重要"
+    ]
+  },
+  {
+    "id": 80,
+    "category": "CSSテクニック",
+    "title": "メディアクエリ（Media Queries）",
+    "content": "内容：画面の横幅などの条件に応じてCSSを切り替える仕組み。レスポンシブデザインの核。\n例：@media (max-width: 600px) {...}",
+    "tags": [
+      "重要"
+    ]
+  },
+  {
+    "id": 81,
+    "category": "CSSテクニック",
+    "title": "色の指定：RGBA",
+    "content": "内容：赤・緑・青に加えて「透明度（Alpha）」を指定する方法。\n例：background-color: rgba(0, 0, 0, 0.1);\n（10%の黒色の影などに使用）",
+    "tags": [
+      "重要"
+    ]
+  },
+  {
+    "id": 82,
+    "category": "CSSテクニック",
+    "title": "ボックスシャドウ（box-shadow）",
+    "content": "内容：要素に影をつけて立体感を出すプロパティ。\n例：box-shodow: 0 4px 15px rgba(0, 0, 0, 0.1);",
+    "tags": [
+      "重要"
+    ]
+  },
+  {
+    "id": 83,
+    "category": "Web制作の作法",
+    "title": "セマンティック（Semantic）",
+    "content": "内容：見た目ではなく、役割や意味（見出し、記事、ナビゲーションなど）に基づいてタグを選ぶ考え方。",
+    "tags": [
+      "重要"
+    ]
+  },
+  {
+    "id": 84,
+    "category": "Web制作の作法",
+    "title": "contenteditable属性",
+    "content": "内容：HTML要素をブラウザ上で直接編集可能にする属性。\n例：<td contenteditable=\"true\">",
+    "tags": [
+      "重要"
+    ]
+  },
+  {
+    "id": 85,
+    "category": "Web制作の作法",
+    "title": "viewport（ビューポート）",
+    "content": "内容：スマホ対応に必須のメタタグ。画面の描画範囲をデバイスの幅に合わせる設定。",
+    "tags": [
+      "重要"
+    ]
+  },
+  {
+    "id": 86,
+    "category": "Web制作の作法",
+    "title": "ケバブケース（kebab-case）",
+    "content": "内容：class-nameのように単語をハイフンで繋ぐ命名規則。\nHTMLのクラス名で最も一般的。",
+    "tags": [
+      "重要"
+    ]
+  },
+  {
+    "id": 87,
+    "category": "IT用語集",
+    "title": "レスポンシブデザイン",
+    "content": "PC、タブレッド、スマホなど、異なる画面サイズに合わせてレイアウトを最適化すること。",
+    "tags": []
+  },
+  {
+    "id": 88,
+    "category": "IT用語集",
+    "title": "ブレイクポイント",
+    "content": "レスポンシブデザインでレイアウトを切り替え基準となる画面幅（例：600pxなど）。",
+    "tags": []
+  },
+  {
+    "id": 89,
+    "category": "IT用語集",
+    "title": "ダークモード（prefers-color-scheme）",
+    "content": "OSの設定がダークモードの場合に自動でスタイルを切り替えるメディアクエリの条件。",
+    "tags": []
+  },
+  {
+    "id": 90,
+    "category": "IT用語集",
+    "title": "ホバー操作",
+    "content": "マウスカーソルを要素の上に乗せる操作。スマホ（タッチデバイス）には存在しない概念。",
+    "tags": []
+  },
+  {
+    "id": 91,
+    "category": "IT用語集",
+    "title": "ファビコン（favicon）/ apple-touch-icon",
+    "content": "ブラウザのタブやスマホのホーム画面に表示される小さなアイコン設定。",
+    "tags": []
   }
 ]
